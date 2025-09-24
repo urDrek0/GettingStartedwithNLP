@@ -10,7 +10,8 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
     - GPU digambarkan sebagai sebuah komponen yang mampu untuk menjalankan sebuah instruksi sederhana dengan skala yang lebih besar.
     - TPU digambarkan sebagai komponen yang mampu untuk menyelesaikan sebuah instruksi yang spesifik, namun tidak fleksibel atau mudah untuk di aplikasikan jika dibandingkan dengan CPU dan GPU
 - **Kapan Menggunakan TensorFlow?** Penggunaan TensorFlow optimal untuk,
-    - prototyping model deep learnin
+    - prototyping model deep learning,
+        Karena TensorFlow mendukung untuk Layer khusus untuk koneksi ke internet atau jaringan, konvolusi layer untuk neural network konvolusional, dan layer RNN (recurrent neural network)/LSTM (long short-term memory)/GRU (gated recurrent unit) untuk model sekuensial.
     - implementasi model yang butuh akselerasi perangkat keras
     - productionizing model di cloud
     - monitoring training
