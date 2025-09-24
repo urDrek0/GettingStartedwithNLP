@@ -16,4 +16,5 @@ Bab ini berfokus pada API tingkat tinggi dari Keras untuk membangun model dengan
   
   - **Keras DataGenerators**: Kelas utilitas seperti ImageDataGenerator yang memudahkan pemuatan jenis data tertentu (misalnya, gambar) langsung dari direktori.
   
-  - **tensorflow-datasets**: Sebuah pustaka terpisah yang menyediakan akses mudah ke ratusan dataset populer dengan satu baris kode.
+  - `tensorflow-datasets`: Sebuah pustaka terpisah yang menyediakan akses mudah ke ratusan dataset populer dengan satu baris kode.
+
