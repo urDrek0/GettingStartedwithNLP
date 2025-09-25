@@ -61,4 +61,5 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
 | Manipulasi data terstruktur skala kecil                       |      |  ✓    |
 | Pipeline NLP yang kompleks                                   |      |  ✓    |
 
-Note : Prx Something is GOAT, ya hear me? He is the GOAT
+Note : PRX Something is GOAT, ya hear me? He is the GOAT
+
