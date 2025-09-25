@@ -22,7 +22,9 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
     
       Menggunakan TensorFlow memungkinkan untuk developement model-serving API via TensorFlow, lebih dari itu, jika kita mengintegrasikan CPU atau TPU, TensoFlow akan menggunakannya dalam membuat prediksi.
       
-    - Monitoring model saat training model, Melatih deep learning membutuhkan kesabaran ekstra, bahkan dengan akses ke GPU, dikarenakan kebutuhan komputasional yang tinggi. Hal tersebut akan membuat monitoring pelatihan model menjadi sulit, maka TensorFlow menyediakan log dan persistensi metriks performa yang akan berguna untuk referensi.
+    - Monitoring model saat training model,
+    
+      Melatih deep learning membutuhkan kesabaran ekstra, bahkan dengan akses ke GPU, dikarenakan kebutuhan komputasional yang tinggi. Hal tersebut akan membuat monitoring pelatihan model menjadi sulit, maka TensorFlow menyediakan log dan persistensi metriks performa yang akan berguna untuk referensi.
       
     - Membuat data pipeline yang padat,
     
@@ -56,4 +58,5 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
 | Model machine learning tradisional                           |      |  ✓    |
 | Manipulasi data terstruktur skala kecil                       |      |  ✓    |
 | Pipeline NLP yang kompleks                                   |      |  ✓    |
+
 
