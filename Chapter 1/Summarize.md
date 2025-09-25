@@ -22,8 +22,8 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
     - Model machine learning tradisional, Machine Learning memiliki portofolio model yang besar (seperti regresi linier/logistik, mendukung vector machines, decision trees, k-means) yang termasuk kedalam banyak kategori dan memiliki motivasi yang berbeda, pendekatan, kelebihan, dan kelemahan.
     - Manipulasi data terstruktur skala kecil, Ketika kita menggunakan data dengan skala yang kecil, maka akan sangant mudah untuk masuk ke memori, karena hal tersebut pandas dan NumPy cenderung lebih cocok untuk eksplorasi dan analisis data, untuk menghindari overfitting.
     - Pipeline NLP yang kompleks, NLP biasanya jarang untuk memindahkan data ke model tanpa preprocessing sederhana (text lowering, menghilangkan tanda baca), namun tahapan asli yang akan menentukan hasil akhir dari preprocessing adalah use case dan model nya. Tahapan seperti lemmatization, stemming, spelling correction, dan preprocessing akan memenuhi pipeline preprocessing, TensorFlow akan menghambat progress ini, untuk kasus ini lebih cocok menggunakan spaCy karena menyediakan antarmuka yang intuitif dan model yang lebih baik untuk tugas pemrosesan standar NLP.
-**"Jika tidak menggunakan TensorFlow, lalu apa solusinya?"** Disarankan menggunakan pustaka lain seperti Scikit-learn, Pandas/NumPy, atau spaCy.
-**Rangkuman waktu menggunakan TensorFlow**
+- **"Jika tidak menggunakan TensorFlow, lalu apa solusinya?"** Disarankan menggunakan pustaka lain seperti Scikit-learn, Pandas/NumPy, atau spaCy.
+- **Rangkuman waktu menggunakan TensorFlow**
 | Kondisi                                                     | Ya  | Tidak |
 |--------------------------------------------------------------|:---:|:-----:|
 | Prototyping model deep learning                              |  ✓  |       |
@@ -34,3 +34,4 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
 | Model machine learning tradisional                           |      |  ✓    |
 | Manipulasi data terstruktur skala kecil                       |      |  ✓    |
 | Pipeline NLP yang kompleks                                   |      |  ✓    |
+
