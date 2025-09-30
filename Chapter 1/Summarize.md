@@ -1,6 +1,7 @@
 # Bagian 1: Dasar-Dasar TensorFlow 2 dan Deep Learning 
 ---
 **Bab 1: Dunia TensorFlow yang Menakjubkan**
+
 Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu TensorFlow dan posisinya dalam lanskap machine learning.
 
 # Teori
@@ -62,4 +63,5 @@ Bab pengantar ini memberikan gambaran umum tingkat tinggi tentang apa itu Tensor
 | Pipeline NLP yang kompleks                                   |      |  ✓    |
 
 Note : PRX Something is GOAT, ya hear me? He is the GOAT
+
 
