@@ -1,5 +1,7 @@
 # GettingStartedwithNLP
 
+![Cover Buku](Cover%20Buku.png)
+
 **Daftar Istilah**
 - Deep Learning: Sub-bidang dari machine learning yang menggunakan Jaringan Saraf Tiruan dengan banyak lapisan (karena itu disebut 'deep' atau 'dalam') untuk belajar dari data dalam jumlah besar. Anggap saja ini cara mengajar komputer berpikir seperti otak manusia, tetapi dengan struktur yang sangat kompleks.
 
