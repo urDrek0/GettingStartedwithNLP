@@ -3,27 +3,27 @@
 ![Cover Buku](Cover%20Buku.png)
 
 **Daftar Istilah**
-- Deep Learning: Sub-bidang dari machine learning yang menggunakan Jaringan Saraf Tiruan dengan banyak lapisan (karena itu disebut 'deep' atau 'dalam') untuk belajar dari data dalam jumlah besar. Anggap saja ini cara mengajar komputer berpikir seperti otak manusia, tetapi dengan struktur yang sangat kompleks.
+- _Deep Learning_: Sub-bidang dari machine learning yang menggunakan Jaringan Saraf Tiruan dengan banyak lapisan (karena itu disebut 'deep' atau 'dalam') untuk belajar dari data dalam jumlah besar. Anggap saja ini cara mengajar komputer berpikir seperti otak manusia, tetapi dengan struktur yang sangat kompleks.
 
-- TensorFlow (TF): Sebuah "kotak perkakas" (framework) buatan Google yang berisi semua alat yang dibutuhkan untuk membangun, melatih, dan menjalankan model deep learning.
+- _TensorFlow (TF)_: Sebuah "kotak perkakas" (framework) buatan Google yang berisi semua alat yang dibutuhkan untuk membangun, melatih, dan menjalankan model deep learning.
 
-- Keras: Sebuah API tingkat tinggi yang menjadi bagian dari TensorFlow. Jika TensorFlow adalah mesin mobil yang rumit, Keras adalah dasbor dan setirnya; membuatnya lebih mudah untuk "dikendarai" atau digunakan.
+- _Keras_: Sebuah API tingkat tinggi yang menjadi bagian dari TensorFlow. Jika TensorFlow adalah mesin mobil yang rumit, Keras adalah dasbor dan setirnya; membuatnya lebih mudah untuk "dikendarai" atau digunakan.
 
-- Jaringan Saraf Tiruan (Neural Network): Model komputasi yang terinspirasi dari cara kerja otak manusia. Terdiri dari "neuron-neuron" buatan yang saling terhubung dalam lapisan-lapisan.
+- _Jaringan Saraf Tiruan (Neural Network)_: Model komputasi yang terinspirasi dari cara kerja otak manusia. Terdiri dari "neuron-neuron" buatan yang saling terhubung dalam lapisan-lapisan.
 
-- CNN (Convolutional Neural Network): Jenis jaringan saraf khusus yang sangat andal dalam memahami data visual seperti gambar. Jaringan ini bisa "melihat" dan mengenali pola seperti tepi, bentuk, hingga objek utuh.
+- _CNN (Convolutional Neural Network)_: Jenis jaringan saraf khusus yang sangat andal dalam memahami data visual seperti gambar. Jaringan ini bisa "melihat" dan mengenali pola seperti tepi, bentuk, hingga objek utuh.
 
-- RNN (Recurrent Neural Network): Jenis jaringan saraf yang memiliki "ingatan". Sangat cocok untuk data berurutan seperti teks atau data deret waktu (misalnya, harga saham dari hari ke hari), karena ia mengingat informasi dari langkah sebelumnya saat memproses langkah saat ini. LSTM & GRU adalah versi canggih dari RNN.
+- _RNN (Recurrent Neural Network)_: Jenis jaringan saraf yang memiliki "ingatan". Sangat cocok untuk data berurutan seperti teks atau data deret waktu (misalnya, harga saham dari hari ke hari), karena ia mengingat informasi dari langkah sebelumnya saat memproses langkah saat ini. LSTM & GRU adalah versi canggih dari RNN.
 
-- Transformer: Arsitektur model deep learning modern yang menjadi standar emas terutama untuk tugas-tugas pemrosesan bahasa (NLP). Berbeda dengan RNN yang memproses kata satu per satu, Transformer bisa melihat "gambaran besar" dari seluruh kalimat secara bersamaan, membuatnya sangat kuat.
+- _Transformer_: Arsitektur model deep learning modern yang menjadi standar emas terutama untuk tugas-tugas pemrosesan bahasa (NLP). Berbeda dengan RNN yang memproses kata satu per satu, Transformer bisa melihat "gambaran besar" dari seluruh kalimat secara bersamaan, membuatnya sangat kuat.
 
-- MLOps (Machine Learning Operations): Praktik untuk membuat seluruh alur kerja machine learning—mulai dari persiapan data, pelatihan model, hingga penerapan di dunia nyata—berjalan secara otomatis, efisien, dan andal. Mirip seperti DevOps di dunia software engineering.
+- _MLOps (Machine Learning Operations)_: Praktik untuk membuat seluruh alur kerja machine learning—mulai dari persiapan data, pelatihan model, hingga penerapan di dunia nyata—berjalan secara otomatis, efisien, dan andal. Mirip seperti DevOps di dunia software engineering.
 
-- API (Application Programming Interface): Sebuah "jembatan" atau cara bagi satu program komputer untuk berkomunikasi dan menggunakan fungsi dari program lain.
+- _API (Application Programming Interface)_: Sebuah "jembatan" atau cara bagi satu program komputer untuk berkomunikasi dan menggunakan fungsi dari program lain.
 
-- Model: Hasil dari proses pelatihan deep learning. Ini adalah program yang telah "belajar" pola dari data dan dapat digunakan untuk membuat prediksi.
+- _Model_: Hasil dari proses pelatihan deep learning. Ini adalah program yang telah "belajar" pola dari data dan dapat digunakan untuk membuat prediksi.
 
-- Pipa Data (Data Pipeline): Serangkaian langkah otomatis untuk mengumpulkan, membersihkan, dan mengubah data mentah menjadi format yang siap digunakan oleh model. Anggap saja seperti jalur perakitan di pabrik, tetapi untuk data.
+- _Pipa Data (Data Pipeline)_: Serangkaian langkah otomatis untuk mengumpulkan, membersihkan, dan mengubah data mentah menjadi format yang siap digunakan oleh model. Anggap saja seperti jalur perakitan di pabrik, tetapi untuk data.
 
 ---
 
