@@ -27,10 +27,6 @@
 
 ---
 
-# SUMMARIZE
-
----
-
 # Bagian 1: Fondasi TensorFlow 2 dan Deep Learning
 - **Bab 1**: Dunia TensorFlow yang Menakjubkan Bab ini adalah pengenalan tingkat tinggi. Anda akan belajar apa itu TensorFlow, mengapa ia penting dalam dunia AI, perbedaan perangkat keras seperti CPU dan GPU untuk deep learning, serta kapan waktu yang tepat (dan tidak tepat) untuk menggunakan TensorFlow.
 
