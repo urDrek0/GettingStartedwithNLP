@@ -21,11 +21,13 @@ Pada contoh proses dalam buku, digunakan MNIST digit data set, yaitu sebuah hand
 Code `load.data()` memungkinkan return dari data latihan dan data yang diujikan. Dalam kasus ini dilakukan __unsupervised task__, sehingga tidak ada label untuk data latihan, sehingga tidak perlu label untuk menyelesaikan tugas ini. MNIST kini dianggap terlalu mudah untuk di identifikasi oleh __computer vision__, sehingga untuk implementasi data set lain sangat dianjurkan. Selanjutnya, untuk memahami proses pelatihan dapat digunakan `print` untuk melihat prosesnya secara langsung, seperti contoh.
 
 `print(x_train)`
+
 `print('x_train has shape {}'.format(x_train.shape))`
 
 begitu juga berlaku dengan `y_train`,
 
 `print(y_train)`
+
 `print('y_train has shape {}'.format(y_train.shape))`
 
 selanjutnya bisa dilakukan normalisasi sepert contoh
@@ -35,11 +37,17 @@ selanjutnya bisa dilakukan normalisasi sepert contoh
 pada contoh kasus shape dari x dan y train adalah sebanyak 60000,28,28 sehingga dengan normalisasi mengaturnya ke satu dimensional vektor sepanjang 784 satuan. Apabila kita menampilkan data maka gambar akan terlihat bisa dikenali secara sekilas, lalu bagaimana cara kita untuk dapat membuat model yang dapat mengenali bahkan ketika gambar terlihat terdistorsi? dengan code berikut akan membuat gambar terdistorsi.
 
 `import numpy as np`
+
 `def generate_masked_inputs(x, p, seed=None):`
+
     `if seed:`
+
         `np.random.seed(seed)`
+
     `mask = np.random.binomial(n=1, p=p, size=x.shape).astype('float32')`
+
     `return x * mask`
+
 `masked_x_train = generate_masked_inputs(norm_x_train, 0.5)`
 
 pada `masked_x_train = generate_masked_inputs(norm_x_train, 0.5)` memberikan kita data yang hanya dapat dikenali 50% dari data aslinya.
@@ -67,7 +75,9 @@ CNN yang digunakan untuk mengklasifikasikan gambar diimplementasikan ke sebuah m
 Pada contoh dalam buku di berikan beberapa supervised data dengan label bermacam - macam dan gambar yang bermacam - macam. Hal ini dimaksudkan untuk nantinya di klasifikasikan berdasarkan label nya. pada buku diberikan code berupa,
 
 `import tensorflow_datasets as tfds`
+
 `data = tfds.load('cifar10')`
+
 `print(data)`
 
 Setelah data di load dan di tampilkan maka akan menampilkan hasil seperti dibawah ini,
@@ -77,7 +87,9 @@ Setelah data di load dan di tampilkan maka akan menampilkan hasil seperti dibawa
 Setelahnya akan dilakukan konversi data images ke `float32` untuk membuat data yang konsisten dan label ke vektor _one-hot encoded_, dengan code di bawah ini.
 
 `import tensorflow as tf`
+
 `def format_data(x, depth):`
+
   `return (tf.cast(x["image"], 'float32'), tf.one_hot(x["label"], depth=depth))`
 
 lalu dengan membuat batch data set dengan fungsi,
@@ -87,6 +99,7 @@ lalu dengan membuat batch data set dengan fungsi,
 lalu kita dapat melihat isi datanya dengan,
 
 `for d in tr_data.take(1):`
+
   `print(d)`
 
 Setelahnya kita bisa memastikan bahwa data sudah siap untuk di ujikan ke model
@@ -106,23 +119,35 @@ CNN terdiri dari beberapa operasi konvolusi dan pooling layers, disertai beberap
 Sebagai Contoh, kita akan membuat CNN dengan Sequenstial API dari Keras dengan code berikut,
 
 `from tensorflow.keras import layers, models`
+
 `import tensorflow.keras.backend as K`
+
 `K.clear_session()`
 
 `cnn = models.Sequential(`
+
   `[layers.Conv2D(`
-    `filters=16, kernel_size= (9,9), strides=(2,2), activation='relu',`
-    `padding='valid', input_shape=(32,32,3)`
+
+    `filters=16, kernel_size= (9,9), strides=(2,2), activation='relu',` padding='valid', input_shape=(32,32,3)`
+
   `),`
+
   `layers.Conv2D(`
+
     `filters=32, kernel_size= (7,7), activation='relu', padding='valid'`
   `),`
+
   `layers.Conv2D(`
+
     `filters=64, kernel_size= (7,7), activation='relu', padding='valid'`
   `),`
+
     `layers.Flatten(),`
+
     `layers.Dense(64, activation='relu'),`
+
     `layers.Dense(10, activation='softmax')]`
+
 `)`
 
 Hal ini akan memnuculkan pertanyaan baru, Bagaimana Hyperparameters di CNN? Pada jaringan CNN, seperti pada contoh, terdapat beberapa parameter, yaitu `filters`, `kernel_size`, `strides`, `activation`, `padding`, dan `input_shape`, selanjutnya parameter tersebut berada di layer `Conv2D`. Idealnya hyperparameters ini harus di seleksi oleh algoritma yang mensortir optimisasi hyperparameter, yang mana akan running ratusan bahkan ribuan model dengan hyperparameters yang berbeda - beda untuk menentukan hyperparamters mana yang lebih optimal untuk akurasi hasil pelatihannya.
@@ -151,38 +176,64 @@ RNN memiliki kemampuan khusus yang CNN dan FCN tidak miliki, yaitu dapat membaca
 Prosesnya kurang lebih sama dengan diatas berupa load data, lalu menampilkan data, dengan code berikut.
 
 `import requests`
+
 `import os`
+
 `def download_data():`
+
   `""" This function downloads the CO2 data from`
+
   `https:/ /datahub.io/core/co2-ppm/r/co2-mm-gl.csv`
+
   `if the file doesn't already exist`
+
   `"""`
+
   `save_dir = "data"`
+
   `save_path = os.path.join(save_dir, 'co2-mm-gl.csv')`
+
   `# Create directories if they are not there`
+
   `if not os.path.exists(save_dir):`
+
     `os.makedirs(save_dir)`
+
   `# Download the data and save`
+
   `if not os.path.exists(save_path):`
+
     `url = "https:/ /datahub.io/core/co2-ppm/r/co2-mm-gl.csv"`
+
     `r = requests.get(url)`
+
     `with open(save_path, 'wb') as f:`
+
       `f.write(r.content)`
+
   `else:`
+
     `print("co2-mm-gl.csv already exists. Not downloading.")`
+
   `return save_path`
+
 `# Downloading the data`
+
 `save_path = download_data()`
+
 
 Atau dapat juga di download melalui `https://datahub.io/core/co2-ppm/r/co2-mm-gl.csv`,  lalu menampilkan data head dengan pandas
 
 `import pandas as pd`
+
 `data = pd.read_csv(save_path)`
+
 `data.head()`
 
 setelahnya dapat kita sort data berdasarkan `date` dan menampikannya dalam bentuk grafik untuk memperoleh visualisasi data yang memudahkan kita untuk menganalisis permasalahannya.
 
 `data = data.set_index('Date')`
+
 `data[["Average"]].plot(figsize=(12,6))`
 
 setelahnya kita dapat menampilkan sejauh apa data dengan rata - rata nya.
@@ -192,13 +243,21 @@ setelahnya kita dapat menampilkan sejauh apa data dengan rata - rata nya.
 setelahnya kita dapat lakukan sebuah proses agar data berada di single positions, sehingga data dapat dicacah dalam jumlah yang lebih kecil untuk di berikan kepada model untuk belajar.
 
 `import numpy as np`
+
 `def generate_data(co2_arr,n_seq):`
+
   `x, y = [],[]`
+
   `for i in range(co2_arr.shape[0]-n_seq):`
+
     `x.append(co2_arr[i:i+n_seq-1])`
+
     `y.append(co2_arr[i+n_seq-1:i+n_seq])`
+
   `x = np.array(x)`
+
   `y = np.array(y)`
+
   `return x,y`
 
 ### 2. Implementasi Model
@@ -210,10 +269,15 @@ Ada beberapa hal yang akan di impelementasikan, yaitu.
 berikut adalah code yang digunakan,
 
 `from tensorflow.keras import layers, models`
+
 `rnn = models.Sequential([`
+
   `layers.SimpleRNN(64),`
+
   `layers.Dense(64, activation='relu'),`
+
   `layers.Dense(1)`
+
 `])`
 
 dengan begitu kita dapat meninjau ulang algoritma yang digunakan untuk RNN sederhana, yang biasa dikenal dengan _Elman-networks_. Algoritma ini ditemukan pada tahun 1990 oleh J.L Elman melalui jurnalnya yang berjudul "Finding Structure in Time", untuk mengetahui lebih lanjut dapat di tinjau melalui link : `http://mng.bz/xnJg` dan `http://mng.bz/Ay2g`
@@ -221,7 +285,9 @@ dengan begitu kita dapat meninjau ulang algoritma yang digunakan untuk RNN seder
 Pada kasus ini yang akan kita prediksi adalah kandungan CO2 di masa depan, dengan beberapa langkah implementasi dan prediksi maka kita bisa menggunakan code,
 
 `rnn.compile(loss='mse', optimizer='adam')`
+
 `x, y = generate_data(data[“Average Diff”], n_seq=13)`
+
 `rnn.fit(x, y, shuffle=True, batch_size=64, epochs=25)`
 
 Dengan optimizer menggunakan adam, Kita akan memperoleh output:
@@ -238,29 +304,45 @@ Permasalahan pada RNN sederhana adalah hanya dapat menerima format tertentu, dim
 Maka kita akan mencoba code untuk mencacah data dalam jumlah kecil,
 
 `import numpy as np`
+
 `def generate_data(co2_arr,n_seq):`
+
   `x, y = [],[]`
+
   `for i in range(co2_arr.shape[0]-n_seq):`
+
     `x.append(co2_arr[i:i+n_seq-1])`
+
     `y.append(co2_arr[i+n_seq-1:i+n_seq])`
+
   `x = np.array(x).reshape(-1,n_seq-1,1)`
+
   `y = np.array(y)`
+
   `return x,y`
 
 lalu melatih model kembali
 
 `x, y = generate_data(data[“Average Diff”], n_seq=13)`
+
 `rnn.fit(x, y, shuffle=True, batch_size=64, epochs=25)`
 
 Selanjutnya kita akan memprediksi CO2 dengan model yang sudah dilatih, menggunakan code
 
 `history = data["Average Diff"].values[-12:].reshape(1,-1,1)`
+
 `true_vals = []`
+
 `prev_true = data["Average"].values[-1]`
+
 `for i in range(60):`
+
   `p_diff = rnn.predict(history).reshape(1,-1,1)`
+
   `history = np.concatenate((history[:,1:,:],p_diff),axis=1)`
+
   `true_vals.append(prev_true+p_diff[0,0,0])`
+
   `prev_true = true_vals[-1]`
 
 pertama kita ekstrak data untuk kurun waktu 12 tahun terakhir
