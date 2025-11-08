@@ -61,6 +61,34 @@ Selain itu perlu juga untuk di lakukan "denosising autoencoders", jika kita kait
 CNN yang digunakan untuk mengklasifikasikan gambar diimplementasikan ke sebuah model dilengkapi dengan dataset yang mencukupi serta variansi data set yang tinggi. CNN berfokus pada akurasi pengklasifikasian gambar.
 
 ### 1. Memahami Data
+
+Pada contoh dalam buku di berikan beberapa supervised data dengan label bermacam - macam dan gambar yang bermacam - macam. Hal ini dimaksudkan untuk nantinya di klasifikasikan berdasarkan label nya. pada buku diberikan code berupa,
+
+`import tensorflow_datasets as tfds`
+`data = tfds.load('cifar10')`
+`print(data)`
+
+Setelah data di load dan di tampilkan maka akan menampilkan hasil seperti dibawah ini,
+
+`{'train': <_PrefetchDataset element_spec={'id': TensorSpec(shape=(), dtype=tf.string, name=None), 'image': TensorSpec(shape=(32, 32, 3), dtype=tf.uint8, name=None), 'label': TensorSpec(shape=(), dtype=tf.int64, name=None)}>, 'test': <_PrefetchDataset element_spec={'id': TensorSpec(shape=(), dtype=tf.string, name=None), 'image': TensorSpec(shape=(32, 32, 3), dtype=tf.uint8, name=None), 'label': TensorSpec(shape=(), dtype=tf.int64, name=None)}>}`
+
+Setelahnya akan dilakukan konfersi data images ke `float32` untuk membuat data yang konsisten dan label ke vektor _one-hot encoded_, dengan code di bawah ini.
+
+`import tensorflow as tf`
+`def format_data(x, depth):`
+  `return (tf.cast(x["image"], 'float32'), tf.one_hot(x["label"], depth=depth))`
+
+lalu dengan membuat batch data set dengan fungsi,
+
+`tr_data = data["train"].map(lambda x: format_data(x, depth=10)).batch(32)`
+
+lalu kita dapat melihat isi datanya dengan,
+
+`for d in tr_data.take(1):`
+  `print(d)`
+
+Setelahnya kita bisa memastikan bahwa data sudah siap untuk di ujikan ke model
+
 ### 2. Model Auto Encoder
 
 ## RNN (Recurrent Neural Networks)
