@@ -3,7 +3,7 @@
 Bab ini akan membahas,
 - Implementasi dan keseluruhan pelatihan FCN (__Fully Connected Networks__) menggunakan Keras
 - Implementasi dan pelatihan CNN (__Convolutional Nerual Networks__) untuk klasifikasi gambar
-- Implementasi dan pelatihan RNN (__Recurrent Neural Networks__) untuk menyelesaikan permasalahn deret waktu (__time-series__)
+- Implementasi dan pelatihan RNN (__Recurrent Neural Networks__) untuk menyelesaikan permasalahan deret waktu (__time-series__)
 
 ---
 
@@ -55,6 +55,8 @@ Selain itu perlu juga untuk di lakukan "denosising autoencoders", jika kita kait
 - Produce gambar dengan kualitas yang lebih baik
 - Menghilangkan randomness variations seperti pencahayaan atau warna
 - Artifacts yang dikarenakan kompresi JPEG
+
+---
 
 ## CNN (Convolutional Neural Networks)
 
@@ -138,11 +140,158 @@ Permasalahannya saat membuat deep models, khususnya adalah ini membatai jumlah l
 - Refleksi input
 - Nilai terdekat
 
+---
+
 ## RNN (Recurrent Neural Networks)
 
 RNN memiliki kemampuan khusus yang CNN dan FCN tidak miliki, yaitu dapat membaca dan mempelajari data dengan deret waktu (__time-series__). Sebenarnya FCN dan CNN dapat membaca data deret waktu, namun perlu perlakuan dan adaptasi yang khusus. RNN tidak hanya digunakan untuk membuat prediksi, tapi juga menggunakan ingatan dari jaringan lama untuk menentukan step pada waktu tertentu.
 
 ### 1. Memahami Data
 
-### 2. Model Auto Encoder
+Prosesnya kurang lebih sama dengan diatas berupa load data, lalu menampilkan data, dengan code berikut.
 
+`import requests`
+`import os`
+`def download_data():`
+  `""" This function downloads the CO2 data from`
+  `https:/ /datahub.io/core/co2-ppm/r/co2-mm-gl.csv`
+  `if the file doesn't already exist`
+  `"""`
+  `save_dir = "data"`
+  `save_path = os.path.join(save_dir, 'co2-mm-gl.csv')`
+  `# Create directories if they are not there`
+  `if not os.path.exists(save_dir):`
+    `os.makedirs(save_dir)`
+  `# Download the data and save`
+  `if not os.path.exists(save_path):`
+    `url = "https:/ /datahub.io/core/co2-ppm/r/co2-mm-gl.csv"`
+    `r = requests.get(url)`
+    `with open(save_path, 'wb') as f:`
+      `f.write(r.content)`
+  `else:`
+    `print("co2-mm-gl.csv already exists. Not downloading.")`
+  `return save_path`
+`# Downloading the data`
+`save_path = download_data()`
+
+Atau dapat juga di download melalui `https://datahub.io/core/co2-ppm/r/co2-mm-gl.csv`,  lalu menampilkan data head dengan pandas
+
+`import pandas as pd`
+`data = pd.read_csv(save_path)`
+`data.head()`
+
+setelahnya dapat kita sort data berdasarkan `date` dan menampikannya dalam bentuk grafik untuk memperoleh visualisasi data yang memudahkan kita untuk menganalisis permasalahannya.
+
+`data = data.set_index('Date')`
+`data[["Average"]].plot(figsize=(12,6))`
+
+setelahnya kita dapat menampilkan sejauh apa data dengan rata - rata nya.
+
+`data["Average Diff"]=data["Average"] - data["Average"].shift(1).fillna(method='bfill')`
+
+setelahnya kita dapat lakukan sebuah proses agar data berada di single positions, sehingga data dapat dicacah dalam jumlah yang lebih kecil untuk di berikan kepada model untuk belajar.
+
+`import numpy as np`
+`def generate_data(co2_arr,n_seq):`
+  `x, y = [],[]`
+  `for i in range(co2_arr.shape[0]-n_seq):`
+    `x.append(co2_arr[i:i+n_seq-1])`
+    `y.append(co2_arr[i+n_seq-1:i+n_seq])`
+  `x = np.array(x)`
+  `y = np.array(y)`
+  `return x,y`
+
+### 2. Implementasi Model
+
+Ada beberapa hal yang akan di impelementasikan, yaitu.
+- Layer RNN dengan 64 hidden units
+- Layer Dense dengan 64 hidden units dan aktivasi ReLU
+- Layer Dense dengan single output dan aktivasi linear
+berikut adalah code yang digunakan,
+
+`from tensorflow.keras import layers, models`
+`rnn = models.Sequential([`
+  `layers.SimpleRNN(64),`
+  `layers.Dense(64, activation='relu'),`
+  `layers.Dense(1)`
+`])`
+
+dengan begitu kita dapat meninjau ulang algoritma yang digunakan untuk RNN sederhana, yang biasa dikenal dengan _Elman-networks_. Algoritma ini ditemukan pada tahun 1990 oleh J.L Elman melalui jurnalnya yang berjudul "Finding Structure in Time", untuk mengetahui lebih lanjut dapat di tinjau melalui link : `http://mng.bz/xnJg` dan `http://mng.bz/Ay2g`
+
+Pada kasus ini yang akan kita prediksi adalah kandungan CO2 di masa depan, dengan beberapa langkah implementasi dan prediksi maka kita bisa menggunakan code,
+
+`rnn.compile(loss='mse', optimizer='adam')`
+`x, y = generate_data(data[“Average Diff”], n_seq=13)`
+`rnn.fit(x, y, shuffle=True, batch_size=64, epochs=25)`
+
+Dengan optimizer menggunakan adam, Kita akan memperoleh output:
+
+`ValueError:`
+`Input 0 of layer sequential_1 is incompatible with the layer:`
+`expected ndim=3, found ndim=2. Full shape received: [None, 12]`
+
+Permasalahan pada RNN sederhana adalah hanya dapat menerima format tertentu, dimana data harus memiliki 3 dimensi utama, yaitu,
+- Batch
+- Waktu
+- Fitur
+
+Maka kita akan mencoba code untuk mencacah data dalam jumlah kecil,
+
+`import numpy as np`
+`def generate_data(co2_arr,n_seq):`
+  `x, y = [],[]`
+  `for i in range(co2_arr.shape[0]-n_seq):`
+    `x.append(co2_arr[i:i+n_seq-1])`
+    `y.append(co2_arr[i+n_seq-1:i+n_seq])`
+  `x = np.array(x).reshape(-1,n_seq-1,1)`
+  `y = np.array(y)`
+  `return x,y`
+
+lalu melatih model kembali
+
+`x, y = generate_data(data[“Average Diff”], n_seq=13)`
+`rnn.fit(x, y, shuffle=True, batch_size=64, epochs=25)`
+
+Selanjutnya kita akan memprediksi CO2 dengan model yang sudah dilatih, menggunakan code
+
+`history = data["Average Diff"].values[-12:].reshape(1,-1,1)`
+`true_vals = []`
+`prev_true = data["Average"].values[-1]`
+`for i in range(60):`
+  `p_diff = rnn.predict(history).reshape(1,-1,1)`
+  `history = np.concatenate((history[:,1:,:],p_diff),axis=1)`
+  `true_vals.append(prev_true+p_diff[0,0,0])`
+  `prev_true = true_vals[-1]`
+
+pertama kita ekstrak data untuk kurun waktu 12 tahun terakhir
+
+`history = data["Average Diff"].values[-12:].reshape(1,-1,1)`
+
+kita akan mengambil data paling terakhir di dalam kolom `average`
+
+`prev_true = data["Average"].values[-1]`
+
+Sekarang kita akan mencoba untuk 5 tahun ke depan
+
+`history = np.concatenate((history[:,1:,:],p_diff),axis=1)`
+
+lalu kita memprediksi
+
+`true_vals.append(prev_true+p_diff[0,0,0])`
+
+Setelahnya kita mengupdate `prev_true` dengan data prediksi terbaru
+
+`prev_true = true_vals[-1]`
+ 
+---
+
+# KESIMPULAN AKHIR
+
+- Jaringan yang terhubung penuh (FCN) adalah salah satu jaringan saraf tiruan yang paling mudah.
+- FCN dapat diimplementasikan menggunakan lapisan Keras Dense.
+- Jaringan saraf tiruan konvolusional (CNN) adalah pilihan populer untuk tugas-tugas visi komputer.
+- TensorFlow menawarkan berbagai lapisan, seperti Conv2D, MaxPool2D, dan Flatten, yang membantu kita mengimplementasikan CNN dengan cepat.
+- CNN memiliki parameter seperti ukuran kernel, langkah, dan padding yang harus diatur dengan hati-hati. Jika tidak, hal ini dapat menyebabkan tensor yang bentuknya tidak tepat dan kesalahan runtime.
+- Jaringan saraf tiruan rekuren (RNN) terutama digunakan untuk belajar dari data deret waktu.
+- RNN pada umumnya mengharapkan data untuk diorganisasikan ke dalam tensor tiga dimensi dengan dimensi batch, waktu, dan fitur. 
+- Jumlah langkah waktu yang diamati RNN merupakan hiperparameter penting yang harus dipilih berdasarkan data.
