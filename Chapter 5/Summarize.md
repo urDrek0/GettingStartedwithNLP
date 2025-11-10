@@ -1,4 +1,4 @@
-# Bab 4 : State of the art in deep learning : Transformers
+# Bab 5 : State of the art in deep learning : Transformers
 
 Bab ini akan membahas,
 - Representasi teks dalam format numerik untuk model machine learning
@@ -37,25 +37,48 @@ Sehingga diperoleh ID dan kalimat yang berkoresponden seperti berikut,
 
 ---
 
-## Memahami Model Transformer
+## Penjelasan Mendalam
 
-### Encoder-decoder pada Transformer
+### 1. Arsitektur Encoder-Decoder
 
-### Pengertian Lebih Dalam
+Transformer dijelaskan sebagai arsitektur encoder-decoder. Encoder memproses seluruh sekuens input untuk membuat representasi kontekstual. Decoder menggunakan representasi dari encoder dan output yang telah dihasilkannya sejauh ini untuk menghasilkan token berikutnya secara autoregresif.
 
-### Layer Self-Attention
+### 2. Self-Attention
 
-### Memeahami Self-Attention dengan skalar
+Ini adalah mekanisme inti dari Transformer. Berbeda dengan RNN yang memproses sekuens kata per kata, self-attention memungkinkan model untuk melihat semua kata lain dalam sekuens saat memproses satu kata tertentu. Ini dilakukan dengan menghitung skor relevansi antara setiap pasangan kata menggunakan tiga vektor: Query (Q), Key (K), dan Value (V). 
 
-### Self-Attention adalah kompetisi
+### 3. Masked Self-Attention
 
-### Masked Self-Attention layers
+Variasi dari self-attention yang digunakan di decoder. Masking ini mencegah decoder untuk "melihat" token-token di masa depan (posisi selanjutnya dalam sekuens) saat memprediksi token saat ini, yang sangat penting untuk tugas-tugas generatif.
 
-### Multi-Head Attention
+### 4. Multi-Head Attention
 
-### Fully Connected Layer
+Ide untuk menjalankan beberapa mekanisme self-attention secara paralel (disebut "heads") dan kemudian menggabungkan hasilnya. Ini memungkinkan model untuk secara bersamaan memperhatikan informasi dari subspace representasi yang berbeda.
 
-### Implementasi keseluruhan
+---
+
+## Gambar atau Grafik Representasi  
+
+**1. Gambar 5.3**
+
+Diagram tingkat tinggi yang sangat baik dari arsitektur encoder-decoder untuk tugas terjemahan mesin, menunjukkan alur dari teks input ke representasi numerik, output encoder, decoder, dan akhirnya output teks.
+
+**2. Gambar 5.6**
+
+Ilustrasi paling detail dan penting di bab ini. Gambar ini memecah komputasi self-attention menjadi langkah-langkah yang dapat dipahami, mulai dari input, pembuatan vektor Q, K, V, perhitungan matriks skor (Q.KT), normalisasi softmax, dan perkalian akhir dengan V untuk mendapatkan output53.
+
+**3. Gambar 5.9**
+Perbandingan visual antara self-attention standar dan masked self-attention, dengan jelas menunjukkan bagaimana masking mencegah koneksi ke token masa depan.
+
+---
+
+## Kode
+
+- **Listing 5.1 & 5.2:** Implementasi `SelfAttentionLayer` sebagai lapisan Keras kustom menggunakan Sub-classing API. Kode ini secara langsung menerjemahkan teori self-attention menjadi kode TensorFlow yang fungsional, termasuk implementasi untuk masking opsional55555555.
+
+- **Listing 5.5 & 5.6:** Kode untuk membangun `EncoderLayer` dan DecoderLayer` yang lebih lengkap, yang menggabungkan multi-head attention dan lapisan fully connected.
+
+- **Listing 5.7:** Kode yang menyatukan semua komponen (`EncoderLayer`, `DecoderLayer`, `Embedding`) untuk membangun model Transformer mini menggunakan Keras Functional API56.
 
 ---
 
