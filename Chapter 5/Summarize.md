@@ -65,7 +65,7 @@ Diagram tingkat tinggi yang sangat baik dari arsitektur encoder-decoder untuk tu
 
 **2. Gambar 5.6**
 
-Ilustrasi paling detail dan penting di bab ini. Gambar ini memecah komputasi self-attention menjadi langkah-langkah yang dapat dipahami, mulai dari input, pembuatan vektor Q, K, V, perhitungan matriks skor (Q.KT), normalisasi softmax, dan perkalian akhir dengan V untuk mendapatkan output53.
+Ilustrasi paling detail dan penting di bab ini. Gambar ini memecah komputasi self-attention menjadi langkah-langkah yang dapat dipahami, mulai dari input, pembuatan vektor Q, K, V, perhitungan matriks skor (Q.KT), normalisasi softmax, dan perkalian akhir dengan V untuk mendapatkan output.
 
 **3. Gambar 5.9**
 Perbandingan visual antara self-attention standar dan masked self-attention, dengan jelas menunjukkan bagaimana masking mencegah koneksi ke token masa depan.
@@ -74,11 +74,11 @@ Perbandingan visual antara self-attention standar dan masked self-attention, den
 
 ## Kode
 
-- **Listing 5.1 & 5.2:** Implementasi `SelfAttentionLayer` sebagai lapisan Keras kustom menggunakan Sub-classing API. Kode ini secara langsung menerjemahkan teori self-attention menjadi kode TensorFlow yang fungsional, termasuk implementasi untuk masking opsional55555555.
+- **Listing 5.1 & 5.2:** Implementasi `SelfAttentionLayer` sebagai lapisan Keras kustom menggunakan Sub-classing API. Kode ini secara langsung menerjemahkan teori self-attention menjadi kode TensorFlow yang fungsional, termasuk implementasi untuk masking opsional.
 
 - **Listing 5.5 & 5.6:** Kode untuk membangun `EncoderLayer` dan DecoderLayer` yang lebih lengkap, yang menggabungkan multi-head attention dan lapisan fully connected.
 
-- **Listing 5.7:** Kode yang menyatukan semua komponen (`EncoderLayer`, `DecoderLayer`, `Embedding`) untuk membangun model Transformer mini menggunakan Keras Functional API56.
+- **Listing 5.7:** Kode yang menyatukan semua komponen (`EncoderLayer`, `DecoderLayer`, `Embedding`) untuk membangun model Transformer mini menggunakan Keras Functional API.
 
 ---
 
